@@ -1,7 +1,13 @@
 title: Remote Access Tool - ScreenConnect Backstage Mode Anomaly
 id: 7b582f1a-b318-4c6a-bf4e-66fe49bf55a5
+related:
+    - id: d1a401ab-8c47-4e86-a7d8-2460b6a53e4a
+      type: derived
+    - id: 51544ca6-51ab-48de-97e9-b1317707760c
+      type: derived
 status: test
-description: Detects suspicious sub processes started by the ScreenConnect client service, which indicates the use of the so-called Backstage mode
+description: |
+    Detects suspicious child processes started by the ScreenConnect client service, which indicates the use of the so-called Backstage mode
 references:
     - https://www.mandiant.com/resources/telegram-malware-iranian-espionage
     - https://docs.connectwise.com/ConnectWise_Control_Documentation/Get_started/Host_client/View_menu/Backstage_mode
@@ -16,7 +22,7 @@ logsource:
     category: process_creation
 detection:
     selection:
-        ParentImage|endswith: 'ScreenConnect.ClientService.exe'
+        ParentImage|endswith: '\ScreenConnect.ClientService.exe'
         Image|endswith:
             - '\cmd.exe'
             - '\powershell.exe'
